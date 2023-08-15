@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <title>Encriptador de Texto - Alura Challenge G5 - Sebastián Rodríguez</title>
+</head>
+<body>
+
+    <img class="logo" src="media/logo.png">
+    
+    <div>
+        <textarea id="input-texto" placeholder="Ingrese el texto aquí"></textarea>
+        <img class="img-aviso" src="media/aviso.png">
+        <p class="aviso">Sólo letras minúsculas y sin acentos.</p>
+        <button onclick="encrypt();clickSonido()" class="encriptar">Encriptar</button>
+        <audio id="audio"><source src="media/clic.wav" type="audio/mpeg"></audio>
+        <button onclick="decrypt();clickSonido()" class="desencriptar">Desencriptar</button>
+    </div>
+    
+    <div class="caja-encriptador">
+        <div id="encriptador-oculto">
+            <img src="media/ningunmensaje.png">
+            <h2>Ningún mensaje fue encontrado</h2>
+            <p>Ingresa el texto que desees encriptar o desencriptar</p>
+        </div>
+        <div id="encriptador">
+            <textarea id="output-texto" readonly></textarea>
+            <button onclick="copyText();clickSonido()" class="copiar">Copiar</button>
+        </div>
+    </div>
+
+
+    <script>
+        function encrypt() {
+            document.getElementById("encriptador").style.display = "inline";
+            document.getElementById("encriptador-oculto").style.display = "none";
+          var inputTexto = document.getElementById("input-texto").value.toLowerCase();
+          var encryptedText = inputTexto
+            .replace(/e/g, "enter")
+            .replace(/i/g, "imes")
+            .replace(/a/g, "ai")
+            .replace(/o/g, "ober")
+            .replace(/u/g, "ufat");
+          
+          document.getElementById("output-texto").value = encryptedText;
+        }
+        
+        function decrypt() {
+            document.getElementById("encriptador").style.display = "inline";
+            document.getElementById("encriptador-oculto").style.display = "none";
+          var inputTexto = document.getElementById("input-texto").value.toLowerCase();
+          var decryptedText = inputTexto
+            .replace(/enter/g, "e")
+            .replace(/imes/g, "i")
+            .replace(/ai/g, "a")
+            .replace(/ober/g, "o")
+            .replace(/ufat/g, "u");
+          
+          document.getElementById("output-texto").value = decryptedText;
+        }
+        
+        function copyText() {
+          var outputTexto = document.getElementById("output-texto");
+          outputTexto.select();
+          outputTexto.setSelectionRange(0, 99999); /* Para dispositivos móviles */
+          document.execCommand("copy");
+        }
+
+        function clickSonido() {
+        var sonido = document.getElementById("audio");
+        audio.play();
+        }
+
+        document.getElementById("encriptador").style.display = "none";
+
+    </script>
+
+    <footer>
+        <p>Encriptador de Texto</p>
+        <p>Alura Challenge G5</p>
+        <p>Sebastián Rodríguez - 2023</p>
+        <a href="https://github.com/sebastianr93" target="_blank">GitHub</a>
+    </footer>
+</body>
+</html>
